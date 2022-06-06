@@ -1,0 +1,52 @@
+<h1 mat-dialog-title>Add Customer Form</h1>
+<form [formGroup]="customerForm" ngNativeValidate (ngSubmit)="addPCustomer()">
+  <div mat-dialog-content>
+    <div class="mb-3">
+      <label for="Fname" class="form-label">CustomerFirstName</label>
+      <input type="text" class="form-control" name="Fname" placeholder="customerFirstName" required
+        formControlName="customerFirstName">
+
+
+
+    </div>
+    <div class="mb-3">
+      <label for="Lname" class="form-label">CustomerLastName</label>
+      <input type="text" class="form-control" name="Lname" placeholder="customerLastName" required
+        formControlName="customerLastName">
+    </div>
+    <div class="mb-3">
+      <label for="CustomerGender" class="form-label">CustomerGender</label>
+
+      <select class="form-select" aria-label="Default select example" formControlName="customerGender">
+        <option value="M">Male</option>
+        <option value="F">Female</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="customerEmail" class="form-label">CustomerEmail</label>
+      <input type="email" class="form-control" name="customerEmail" placeholder="customerEmail" required
+        formControlName="customerEmail">
+    </div>
+    <div class="mb-3">
+      <label for="customerDOB" class="form-label">CustomerDOB</label>
+      <input type="date" class="form-control" name="customerDOB" placeholder="Description"
+        formControlName="customerDOB">
+    </div>
+
+
+    <div formArrayName="addresses">
+      <div class="mb-3" *ngFor=" let addresses of customerAddresses.controls; let i=index">
+        <label for="{{'uAddress-' + i}}" class="form-label">Address No. #{{i+1}}</label>
+        <input type="text" [formControlName]="i" class="form-control" id="{{'uAddress-' + i}}"
+          name="{{'userPhone-' + i}}">
+        <button type="button" class="btn btn-primary" (click)="addAdressNo($event)"> + </button>
+      </div>
+    </div>
+  </div>
+  <div mat-dialog-action [align]="'end'">
+    <button mat-raised-button mat-button color="warn" mat-dialog-close>Close</button>
+    <button style="margin-left:8px ;" mat-raised-button color="primary" type="submit">{{actionBtn}}</button>
+
+  </div>
+
+</form>
